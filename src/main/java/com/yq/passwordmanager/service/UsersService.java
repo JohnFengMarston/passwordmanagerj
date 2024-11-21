@@ -14,4 +14,6 @@ public interface UsersService extends IService<Users> {
     Result<List<Users>> getUsers();
 
     Result<Boolean> updateUser(Users users);
+
+    Result<Boolean> deleteUser(long userId);
 }

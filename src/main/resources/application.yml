@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: mpw:I/8l8v72Vp59soQae3dflDI7rKIM5VpBbAP3ENXCyddzV7VgvjEFX0JZK2x+uvFSfUj4nfFSMDgdoNxRhOWmUDBUP9hQBjHQQVWn9IFOM1Gp84mKs4ueBuAveor121TNG9LhQIeawNMJ1zUZxm1gVNtpNnl8ul1Q76fDmEHJZAU=
+    url: mpw:I/8l8v72Vp59soQae3dflDI7rKIM5VpBbAP3ENXCyddzV7VgvjEFX0JZK2x+uvFSxju2muCV6nyxnHLjywlCkAWIyhLqrWnCWWrrcKulYok=
     username: mpw:TB524VPh/1y1K7Gj07LVTw==
     password: mpw:zPwjddIt8Fe+ii9GZZVIlg==
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -10,14 +10,17 @@ spring:
       host: 192.168.205.128
       port: 6379
       username: homeskating
-  security:
-    user:
-      name: yiquangu
-      password: mh3EZDDhRs4agkC
 mybatis-plus:
   global-config:
     db-config:
       id-type: assign_id
   configuration:
     map-underscore-to-camel-case: true
+server:
+  port: 8848
+  http2:
+    enabled: true
+logging:
+  level:
+    org.springframework.security: DEBUG
 
