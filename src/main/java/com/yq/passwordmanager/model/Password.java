@@ -3,7 +3,6 @@ package com.yq.passwordmanager.model;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@TableName("passwords")
 public class Password {
     @TableId
     private Long passwordId;
@@ -24,9 +22,9 @@ public class Password {
     private String passwordValue;
     private String passwordNote;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Timestamp passwordCreateTime;
+    private Timestamp passwordCreatedTime;
     @TableField(fill = FieldFill.UPDATE)
-    private Timestamp passwordUpdateTime;
+    private Timestamp passwordUpdatedTime;
     @TableField(exist = false)
     private String nativePassword;
 }

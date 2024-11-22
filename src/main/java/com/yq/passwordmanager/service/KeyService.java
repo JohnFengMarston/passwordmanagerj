@@ -1,7 +1,6 @@
 package com.yq.passwordmanager.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yq.passwordmanager.mapper.KeyMapper;
 import com.yq.passwordmanager.model.Key;
 import com.yq.passwordmanager.model.Result;
 

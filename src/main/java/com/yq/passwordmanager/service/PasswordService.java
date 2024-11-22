@@ -11,9 +11,9 @@ public interface PasswordService extends IService<Password> {
 
     Result<Boolean> updatePassword(Password password);
 
-    Result<Boolean> deletePassword(Password password);
+    Result<Boolean> deletePasswordByUserId(Long userId);
 
     Result<List<Password>> getPasswordsByUserId(Long userId);
 
-    Result<Password> getPasswordById(Long passwordId);
+    Result<Password> getPasswordByUserId(Long userId);
 }

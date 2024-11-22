@@ -1,5 +1,7 @@
 package com.yq.passwordmanager.model;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +19,8 @@ public class Key {
     private String rsaPrivateKey;
     private String rsaPublicKey;
     private String aesKey;
-    private Timestamp keyCreateTime;
-    private Timestamp keyUpdateTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Timestamp keyCreatedTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Timestamp keyUpdatedTime;
 }

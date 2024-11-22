@@ -8,7 +8,6 @@ import com.yq.passwordmanager.mapper.UsersMapper;
 import com.yq.passwordmanager.model.Result;
 import com.yq.passwordmanager.model.Users;
 import com.yq.passwordmanager.service.UsersService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +17,8 @@ import java.util.List;
  * 用户相关操作服务
  */
 @Service
-@AllArgsConstructor
 @Slf4j
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements UsersService {
-    private final UsersMapper usersMapper;
-
     @Override
     public Result<Users> getUserById(long userId) {
         Users user = getById(userId);
