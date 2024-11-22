@@ -10,12 +10,24 @@ import java.sql.Timestamp;
 public class TimeMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "userCreatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
-        this.strictInsertFill(metaObject, "userUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        if (metaObject.hasGetter("userCreateTime")) {
+            this.strictInsertFill(metaObject, "userCreatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+            this.strictInsertFill(metaObject, "userUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        }
+        if (metaObject.hasGetter("passwordCreateTime")) {
+            this.strictInsertFill(metaObject, "passwordCreatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+            this.strictInsertFill(metaObject, "passwordUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        }
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.strictUpdateFill(metaObject, "userUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        if (metaObject.hasGetter("userUpdateTime")) {
+            this.strictUpdateFill(metaObject, "userUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        }
+        if (metaObject.hasGetter("passwordUpdateTime")) {
+            this.strictInsertFill(metaObject, "passwordUpdatedTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
+        }
+
     }
 }

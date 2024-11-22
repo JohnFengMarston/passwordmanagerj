@@ -1,13 +1,21 @@
 package com.yq.passwordmanager;
 
 
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import com.baomidou.mybatisplus.core.toolkit.AES;
 import lombok.extern.slf4j.Slf4j;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
 
 @SpringBootTest
 @Slf4j
@@ -30,5 +38,23 @@ class PasswordmanagerApplicationTests {
         log.info("{}", userNameData);
         String passwordData = AES.encrypt("x)4al2[W&@6Ido=", randomKey);
         log.info("{}", passwordData);
+    }
+
+    @Test
+    void testRSAAndAES() {
+        RSA rsa = new RSA();
+        String privateKeyBase64 = rsa.getPrivateKeyBase64();
+        // 随机生成密钥
+        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
+        log.info("privateKeyBase64:{}", privateKeyBase64);
+// 构建
+        cn.hutool.crypto.symmetric.AES aes = SecureUtil.aes(key);
+        String encryptHex = aes.encryptHex(privateKeyBase64);
+        log.info("encryptHex:{}", encryptHex);
+        String decryptStr = aes.decryptStr(encryptHex);
+        log.info("decryptStr:{}", decryptStr);
+        byte[] encrypt = rsa.encrypt(StrUtil.bytes("Hello World!", CharsetUtil.CHARSET_UTF_8), KeyType.PublicKey);
+        byte[] decrypt = rsa.decrypt(encrypt, KeyType.PrivateKey);
+        log.info("{}", StrUtil.str(decrypt, CharsetUtil.CHARSET_UTF_8));
     }
 }

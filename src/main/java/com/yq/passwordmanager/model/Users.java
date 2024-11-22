@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@TableName(value = "yq_pm_users")
+@TableName(value = "users")
 public class Users {
     @TableId
     private Long userId;
