@@ -6,6 +6,8 @@ import com.yq.passwordmanager.service.PasswordService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/passwords")
 @AllArgsConstructor
@@ -20,5 +22,15 @@ public class PasswordController {
     @DeleteMapping("/{userId}")
     public Result<Boolean> deletePasswordByUserId(@PathVariable Long userId) {
         return passwordService.deletePasswordByUserId(userId);
+    }
+
+    @PutMapping
+    public Result<Boolean> updatePassword(@RequestBody Password password) {
+        return passwordService.updatePassword(password);
+    }
+
+    @GetMapping("/{userId}")
+    public Result<List<Password>> getPasswordsByUserId(@PathVariable Long userId) {
+        return passwordService.getPasswordsByUserId(userId);
     }
 }

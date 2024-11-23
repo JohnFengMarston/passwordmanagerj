@@ -49,13 +49,13 @@ public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeySe
     }
 
     @Override
-    public Result<Boolean> updateKeyByUserId(Key key) {
-        return null;
-    }
-
-    @Override
     public Result<Boolean> deleteKeyByUserId(Long userId) {
-        return null;
+        QueryWrapper<Key> keyQueryWrapper = new QueryWrapper<Key>().eq(true, "user_id", userId);
+        boolean removeResult = remove(keyQueryWrapper);
+        if (BooleanUtil.isTrue(removeResult)) {
+            return Result.success(removeResult, "删除秘钥成功！", null);
+        }
+        return Result.failure(removeResult, "删除秘钥失败！", null);
     }
 
     @Override

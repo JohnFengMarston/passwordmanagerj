@@ -21,9 +21,9 @@ public class Password {
     private String accountContent;
     private String passwordValue;
     private String passwordNote;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp passwordCreatedTime;
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Timestamp passwordUpdatedTime;
     @TableField(exist = false)
     private String nativePassword;

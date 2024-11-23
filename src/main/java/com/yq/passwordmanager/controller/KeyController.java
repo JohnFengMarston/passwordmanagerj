@@ -21,4 +21,9 @@ public class KeyController {
     public Result<Key> getKeyByUserId(@PathVariable Long userId) {
         return keyService.getKeyByUserId(userId);
     }
+
+    @DeleteMapping("/{userId}")
+    public Result<Boolean> deleteKeyByUserId(@PathVariable Long userId) {
+        return keyService.deleteKeyByUserId(userId);
+    }
 }
