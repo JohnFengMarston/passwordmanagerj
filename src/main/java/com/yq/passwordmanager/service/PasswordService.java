@@ -15,5 +15,4 @@ public interface PasswordService extends IService<Password> {
 
     Result<List<Password>> getPasswordsByUserId(Long userId);
 
-    Result<Password> getPasswordByUserId(Long userId);
 }

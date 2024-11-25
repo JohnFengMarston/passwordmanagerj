@@ -2,7 +2,6 @@ package com.yq.passwordmanager.service.impl;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
@@ -75,11 +74,6 @@ public class PasswordServiceImpl extends ServiceImpl<PasswordMapper, Password> i
             return Result.success(passwordList, "查询密码集合成功！", null);
         }
         return Result.failure(passwordList, "查询密码列表失败！", null);
-    }
-
-    @Override
-    public Result<Password> getPasswordByUserId(Long userId) {
-        return null;
     }
 
     private String getNativePassword(Password password) {

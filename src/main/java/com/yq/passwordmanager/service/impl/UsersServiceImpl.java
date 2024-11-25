@@ -4,11 +4,15 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yq.passwordmanager.event.UserAddEvent;
+import com.yq.passwordmanager.event.UserDeleteEvent;
 import com.yq.passwordmanager.mapper.UsersMapper;
 import com.yq.passwordmanager.model.Result;
 import com.yq.passwordmanager.model.Users;
 import com.yq.passwordmanager.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +23,13 @@ import java.util.List;
 @Service
 @Slf4j
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements UsersService {
+    private final ApplicationEventPublisher applicationEventPublisher;
+
+    @Autowired
+    public UsersServiceImpl(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
+
     @Override
     public Result<Users> getUserById(long userId) {
         Users user = getById(userId);
@@ -33,6 +44,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         users.setUserPasswordHash(BCrypt.hashpw(users.getUserPassword(), BCrypt.gensalt()));
         boolean saveResult = save(users);
         if (BooleanUtil.isTrue(saveResult)) {
+            applicationEventPublisher.publishEvent(new UserAddEvent(this, users.getUserId()));
             return Result.success(saveResult, "新增用户成功！", null);
         }
         return Result.failure(null, "新增用户失败！", null);
@@ -64,6 +76,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     public Result<Boolean> deleteUser(long userId) {
         boolean deleteResult = removeById(userId);
         if (BooleanUtil.isTrue(deleteResult)) {
+            UserDeleteEvent userDeleteEvent = new UserDeleteEvent(this, userId);
+            applicationEventPublisher.publishEvent(userDeleteEvent);
             return Result.success(deleteResult, "删除用户数据成功", null);
         }
         return Result.failure(deleteResult, "删除用户失败！", null);

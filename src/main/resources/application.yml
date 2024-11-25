@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: mpw:I/8l8v72Vp59soQae3dflDI7rKIM5VpBbAP3ENXCyddzV7VgvjEFX0JZK2x+uvFSxju2muCV6nyxnHLjywlCkAWIyhLqrWnCWWrrcKulYok=
-    username: mpw:TB524VPh/1y1K7Gj07LVTw==
+    username: mpw:gyd3tdZJgfMVRcP4Nh8abA==
     password: mpw:zPwjddIt8Fe+ii9GZZVIlg==
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -14,9 +14,9 @@ spring:
   data:
     redis:
       password: d0isSRu4iWtDyOj
-      host: 192.168.205.128
+      host: 172.31.61.167
       port: 6379
-      username: homeskating
+      username: HomeSkating
 mybatis-plus:
   global-config:
     db-config:

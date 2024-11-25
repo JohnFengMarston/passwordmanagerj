@@ -34,7 +34,7 @@ class PasswordmanagerApplicationTests {
 // 使用随机密钥加密数据
         String urlData = AES.encrypt("jdbc:mysql://192.168.205.128:3306/yq_password_manager?serverTimezone=UTC", randomKey);
         log.info("{}", urlData);
-        String userNameData = AES.encrypt("yiquangu", randomKey);
+        String userNameData = AES.encrypt("HomeSkating", randomKey);
         log.info("{}", userNameData);
         String passwordData = AES.encrypt("x)4al2[W&@6Ido=", randomKey);
         log.info("{}", passwordData);
