@@ -27,4 +27,5 @@ public class Users {
     private Timestamp userUpdatedTime;
     @TableField(exist = false)
     private String userPassword;
+    private String userAvatarUrl;
 }

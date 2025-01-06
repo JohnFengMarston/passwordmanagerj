@@ -38,4 +38,9 @@ public class UsersController {
     public Result<Boolean> deleteUser(@PathVariable Long userId) {
         return usersService.deleteUser(userId);
     }
+
+    @GetMapping("/email/{userEmail}")
+    public Result<String> getUserAvatar(@PathVariable String userEmail) {
+        return usersService.getUserAvatar(userEmail);
+    }
 }

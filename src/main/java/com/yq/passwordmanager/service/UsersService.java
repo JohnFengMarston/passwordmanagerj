@@ -16,4 +16,6 @@ public interface UsersService extends IService<Users> {
     Result<Boolean> updateUser(Users users);
 
     Result<Boolean> deleteUser(long userId);
+
+    Result<String> getUserAvatar(String userEmail);
 }

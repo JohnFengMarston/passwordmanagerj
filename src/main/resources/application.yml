@@ -1,6 +1,8 @@
+file:
+  upload-dir: uploads/avatar
 spring:
   datasource:
-    url: mpw:I/8l8v72Vp59soQae3dflDI7rKIM5VpBbAP3ENXCyddzV7VgvjEFX0JZK2x+uvFSxju2muCV6nyxnHLjywlCkAWIyhLqrWnCWWrrcKulYok=
+    url: mpw:I/8l8v72Vp59soQae3dflJ1Y4YtBQWD9aiExsoBBMwxDjEFNgbnNKrmCJ4MVPH66ZCgIJDHqfl0MRYt03NuYKH3MH1ELiCWvP/p/UkXeovM=
     username: mpw:gyd3tdZJgfMVRcP4Nh8abA==
     password: mpw:zPwjddIt8Fe+ii9GZZVIlg==
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,12 +13,18 @@ spring:
       max-lifetime: 180000
       connection-timeout: 3000
       pool-name: passwordManagerPool
+  web:
+    resources:
+      static-locations: file:${file.upload-dir},classpath:/static
   data:
     redis:
       password: d0isSRu4iWtDyOj
-      host: 172.31.61.167
+      host: 192.168.44.128
       port: 6379
       username: HomeSkating
+  threads:
+    virtual:
+      enabled: true
 mybatis-plus:
   global-config:
     db-config:

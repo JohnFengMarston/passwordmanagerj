@@ -3,6 +3,7 @@ package com.yq.passwordmanager.service.impl;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.BCrypt;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yq.passwordmanager.event.UserAddEvent;
 import com.yq.passwordmanager.event.UserDeleteEvent;
@@ -81,5 +82,22 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
             return Result.success(deleteResult, "删除用户数据成功", null);
         }
         return Result.failure(deleteResult, "删除用户失败！", null);
+    }
+
+    /**
+     * 根据用户邮箱获取用户头像地址
+     * according to user's email get user's avatar url
+     * @param userEmail
+     * @return
+     */
+    @Override
+    public Result<String> getUserAvatar(String userEmail) {
+        QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
+        usersQueryWrapper.eq("user_email", userEmail);
+        Users users = getOne(usersQueryWrapper);
+        if (ObjectUtil.isNotNull(users)) {
+            return Result.success(users.getUserAvatarUrl(), "获取用户头像成功!", null);
+        }
+        return Result.failure(null,"查无此用户！",null);
     }
 }

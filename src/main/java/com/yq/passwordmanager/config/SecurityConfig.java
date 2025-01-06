@@ -30,8 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable()) // 禁用 CSRF 保护
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/csr").permitAll()
+                        // 放行静态资源
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.ico").permitAll()
+                        // 放行 /avatar/* 路径
+                        .requestMatchers("/avatar/**","/csr").permitAll()
+                        // 其他请求需要认证
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
