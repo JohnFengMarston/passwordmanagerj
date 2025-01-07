@@ -1,5 +1,6 @@
 file:
-  upload-dir: uploads/avatar
+  upload-dir: uploads
+  avatar-upload-dir: uploads/avatar
 spring:
   datasource:
     url: mpw:I/8l8v72Vp59soQae3dflJ1Y4YtBQWD9aiExsoBBMwxDjEFNgbnNKrmCJ4MVPH66ZCgIJDHqfl0MRYt03NuYKH3MH1ELiCWvP/p/UkXeovM=

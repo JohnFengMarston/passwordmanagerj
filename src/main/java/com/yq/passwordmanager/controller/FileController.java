@@ -14,7 +14,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/file")
 public class FileController {
-    @Value("${file.upload-dir}")
+    @Value("${file.avatar-upload-dir}")
     private String uploadDir;
 
     @PostMapping("/upload")
