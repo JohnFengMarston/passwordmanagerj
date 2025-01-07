@@ -18,4 +18,6 @@ public interface UsersService extends IService<Users> {
     Result<Boolean> deleteUser(long userId);
 
     Result<String> getUserAvatar(String userEmail);
+
+    Result<String> login(String userEmail, String password);
 }

@@ -43,4 +43,9 @@ public class UsersController {
     public Result<String> getUserAvatar(@PathVariable String userEmail) {
         return usersService.getUserAvatar(userEmail);
     }
+
+    @PostMapping("/login")
+    public Result<String> login(@RequestParam("email") String userEmail, @RequestParam("password") String password) {
+        return usersService.login(userEmail, password);
+    }
 }

@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import com.baomidou.mybatisplus.core.toolkit.AES;
 import lombok.extern.slf4j.Slf4j;
@@ -56,5 +57,11 @@ class PasswordmanagerApplicationTests {
         byte[] encrypt = rsa.encrypt(StrUtil.bytes("Hello World!", CharsetUtil.CHARSET_UTF_8), KeyType.PublicKey);
         byte[] decrypt = rsa.decrypt(encrypt, KeyType.PrivateKey);
         log.info("{}", StrUtil.str(decrypt, CharsetUtil.CHARSET_UTF_8));
+    }
+
+    @Test
+    void testPasswordHash() {
+        boolean checkPWResult = BCrypt.checkpw("Di1bubai", "$2a$10$bkECjEYAulrXOJppmibFO.XeaXtq2yF5fkUptkBUH0NFhXMiqZfOe");
+        log.info("{}", checkPWResult);
     }
 }

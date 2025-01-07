@@ -2,6 +2,7 @@ package com.yq.passwordmanager.service.impl;
 
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -87,6 +88,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     /**
      * 根据用户邮箱获取用户头像地址
      * according to user's email get user's avatar url
+     *
      * @param userEmail
      * @return
      */
@@ -98,6 +100,21 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         if (ObjectUtil.isNotNull(users)) {
             return Result.success(users.getUserAvatarUrl(), "获取用户头像成功!", null);
         }
-        return Result.failure(null,"查无此用户！",null);
+        return Result.failure(null, "查无此用户！", null);
     }
+
+    @Override
+    public Result<String> login(String userEmail, String password) {
+        QueryWrapper<Users> queryWrapper = new QueryWrapper<Users>().eq("user_email", userEmail);
+        Users users = getOne(queryWrapper);
+        log.info(users.toString());
+        boolean checkPWResult = BCrypt.checkpw(password, users.getUserPasswordHash());
+        if (BooleanUtil.isTrue(checkPWResult)) {
+            return Result.success("密码正确", "登录成功！", null);
+        } else {
+            return Result.failure("密码错误", "登录失败！", null);
+        }
+
+    }
+
 }
